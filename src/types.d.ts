@@ -30,7 +30,6 @@ import type {
   ANIMATION_STATUS,
   GESTURE_SOURCE,
   KEYBOARD_STATUS,
-  SCROLLABLE_STATUS,
   SCROLLABLE_TYPE,
 } from './constants';
 
@@ -149,22 +148,21 @@ export interface TimingConfig {
 }
 
 export type SpringConfig = {
-  stiffness?: number;
+  mass?: number;
   overshootClamping?: boolean;
-  restDisplacementThreshold?: number;
-  restSpeedThreshold?: number;
+  energyThreshold?: number;
   velocity?: number;
   reduceMotion?: ReduceMotion;
 } & (
   | {
-      mass?: number;
+      stiffness?: number;
       damping?: number;
       duration?: never;
       dampingRatio?: never;
       clamp?: never;
     }
   | {
-      mass?: never;
+      stiffness?: never;
       damping?: never;
       duration?: number;
       dampingRatio?: number;

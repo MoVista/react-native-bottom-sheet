@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Keyboard, Platform } from 'react-native';
-import { runOnJS, useSharedValue } from 'react-native-reanimated';
+import { useSharedValue } from 'react-native-reanimated';
+import { scheduleOnRN } from 'react-native-worklets';
 import {
   ANIMATION_SOURCE,
   GESTURE_SOURCE,
@@ -26,8 +27,6 @@ const INITIAL_CONTEXT: GestureEventContextType = {
   initialKeyboardStatus: KEYBOARD_STATUS.UNDETERMINED,
   isScrollablePositionLocked: false,
 };
-
-const dismissKeyboardOnJs = runOnJS(Keyboard.dismiss);
 
 // biome-ignore lint: to be addressed!
 const resetContext = (context: any) => {
@@ -337,7 +336,7 @@ export const useGestureEventsHandlersDefault = () => {
               WINDOW_HEIGHT - animatedKeyboardState.get().heightWithinContainer
           )
         ) {
-          dismissKeyboardOnJs();
+          scheduleOnRN(Keyboard.dismiss);
         }
       }
 
