@@ -37,7 +37,7 @@
     "delete-debug-view": "rm -r ./lib/commonjs/components/bottomSheetDebugView && rm -r ./lib/module/components/bottomSheetDebugView && rm -r ./lib/typescript/components/bottomSheetDebugView",
     "delete-dts.js": "find ./lib/commonjs -name '*.d.js*' -delete && find ./lib/module -name '*.d.js*' -delete",
     "release": "rm -rf lib && yarn build && release-it",
-    "prepare": "bob build && yarn copy-dts && yarn delete-dts.js && yarn delete-debug-view",
+    "postinstall": "yarn build",
     "example": "yarn --cwd example",
     "bootstrap": "yarn install && yarn example"
   },
